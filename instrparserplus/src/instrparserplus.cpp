@@ -20,7 +20,8 @@ using std::string;
 #include <sstream>
 
 //Initialize parameters
-int memtrix[1000],instr=0, increm=0;;
+int memtrix[1000],instr=0, increm=0;
+
 
 int main()
 {
@@ -54,4 +55,19 @@ int main()
 	fin.close();
 	fou.close();
 }//END main
+
+
+
+class Interp{
+
+	static int PC;
+	static int registers[10];
+	static int instr_type;
+	static int memory[1000];
+	static int instructionCounter;
+
+	void interpret(int memory[], int starting_address){
+		static bool run_bit = true;
+		}
+	};//END class Interp
 
