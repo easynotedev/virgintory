@@ -25,6 +25,7 @@ int memtrix[1000],instr=0, increm=0;;
 int main()
 {
 	//matrix-check
+	cout << "ANTOI" << endl;
 	cout << "Initialize RAM" << endl;
 	for(int i=0; i<1000; i++)
 	{
