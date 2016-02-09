@@ -7,7 +7,8 @@
 //  		   : because of the huge support of the online-community
 // Notably	   : Stackoverflow.com , cplusplus.com , MinGW.com , Eclipse.com
 //============================================================================
-
+//I notice that the assignment only manages the first 10 Registers, since each
+//register holds three-digit integer means d or n could only reach up until 9
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -19,14 +20,16 @@ using std::string;
 #include <sstream>
 
 //Initialize parameters
-int memtrix[10],instr=0, increm=0;;
+int memtrix[1000],instr=0, increm=0;
+
 
 int main()
 {
 	//matrix-check
-	for(int i=0; i<10; i++)
+	cout << "Initialize RAM" << endl;
+	for(int i=0; i<1000; i++)
 	{
-		cout << memtrix[i] << endl;
+		 cout << "Register"<<i<<":  " << memtrix[i] <<endl;
 	}
 	// create a file-reading object
 	ifstream fin("input.txt");
@@ -35,7 +38,8 @@ int main()
 		return 1;
 	}//END file-checker
 	cout << "Found input.txt" << endl;
-	cout << "Parsing lines" << endl;
+	cout << "Parsing input lines" << endl;
+	cout << endl;
 	std::string line;
 	ofstream fou("output.txt");
 
@@ -44,11 +48,26 @@ int main()
 		std::stringstream iss(line);
 			 iss >> instr;
 			 memtrix[increm] = instr;
-			 cout << memtrix[increm] <<endl;
+			 cout << "Register"<<increm<<":  " << memtrix[increm] <<endl;
 			 increm++;
 	  }//END while parser
 
 	fin.close();
 	fou.close();
 }//END main
+
+
+
+class Interp{
+
+	static int PC;
+	static int registers[10];
+	static int instr_type;
+	static int memory[1000];
+	static int instructionCounter;
+
+	void interpret(int memory[], int starting_address){
+		static bool run_bit = true;
+		}
+	};//END class Interp
 
