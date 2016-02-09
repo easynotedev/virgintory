@@ -65,9 +65,29 @@ class Interp{
 	static int instr_type;
 	static int memory[1000];
 	static int instructionCounter;
+	static bool run_bit;
 
-	void interpret(int memory[], int starting_address){
-		static bool run_bit = true;
-		}
-	};//END class Interp
+	public:void interpret(int memory[], int starting_address){
+		run_bit = true;
+		PC = starting_address;
+		while(run_bit){
+
+			instr = memory[PC];		//fetch next instruction into instr
+			PC++;		//increment program counter
+			instr_type = get_instr_type(instr);		//determine instruction type
+
+			/*put //execute instruction*/
+		}//END while run_bit is true
+	}//END method interpret
+
+
+	private:static int get_instr_type(int addr){
+		return 0;
+	}//END method get_instr_type
+
+	private:static void execute(int type, int data){
+
+	}//END method execute
+
+};//END class Interp
 
