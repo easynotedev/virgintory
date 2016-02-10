@@ -19,25 +19,45 @@ using std::string;
 #include <sstream>
 using std::stringstream;
 
+//Input and Output pointer and creation
+ifstream fin("input.txt");
+ofstream fou("output.txt");
+
 class Interp{
 
-	static int PC;
+	int PC;
 	static int registers[10];
-	static int instr;
-	static int instr_type;
+	int instr;
+	int instr_type;
 	static int memory[1000];
-	static int instructionCounter;
-	static bool run_bit;
+	int instructionCounter;
+	bool run_bit = true;
 
-	public:void interpret(int memory[], int starting_address){
-		run_bit = true;
+/*
+ *1for (int iii=0;iii<90; iii++)
+2{
+3anArray[iii] = txtstream.readline(); //reads one line and writes it to the array
+4}
+ *
+ */
+
+public:void interpret(int memory[], int starting_address){
+
 		PC = starting_address;
 		while(run_bit){
 			instr = memory[PC];		//fetch next instruction into instr
+			for(int i=0;i<10;i++){	//sticks Memory data to registers
+									//10 at a time
+			}//END loop
 			PC++;		//increment program counter
 			instr_type = get_instr_type(instr);		//determine instruction type
-			execute(1,1); //execute instruction*/
+			if(instr == 100){
+				run_bit = false;
+			}//END if
+			fou <<"Register "<<PC<<": "<<instr << endl;
+			//execute(1,1); //execute instruction*/
 		}//END while run_bit is true
+
 	}//END method interpret
 
 
@@ -70,9 +90,11 @@ int main()
 		stringstream iss(line);
 			 iss >> instrno;
 			 memtrix[increm] = instrno;
-			 cout << "Register"<<increm<<":  " << memtrix[increm] <<endl;
+			 fou << "Memory "<<increm<<": " << memtrix[increm] <<endl;
 			 increm++;
 	  }//END while parser
+	Interp quadcore;
+	quadcore.interpret(memtrix,0);
 
 	fin.close();
 	fou.close();

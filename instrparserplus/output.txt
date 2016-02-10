@@ -1,0 +1,15 @@
+Register 1: 299
+Register 2: 392
+Register 3: 395
+Register 4: 499
+Register 5: 392
+Register 6: 395
+Register 7: 499
+Register 8: 100
+emory 9: 279
+Memory 10: 472
+Memory 11: 211
+Memory 12: 618
+Memory 13: 789
+Memory 14: 78
+Memory 15: 100
