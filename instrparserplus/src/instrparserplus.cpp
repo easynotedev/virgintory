@@ -44,15 +44,20 @@ class Interp{
 public:void interpret(int memory[], int starting_address){
 
 		PC = starting_address;
+		static int d_byte;
+		static int n_byte;
 		while(run_bit){
 			instr = memory[PC];		//fetch next instruction into instr
 			for(int i=0;i<10;i++){	//sticks Memory data to registers
 									//10 at a time
 			}//END loop
 			PC++;		//increment program counter
-			instr_type = get_instr_type(instr);		//determine instruction type
-			if(instr == 100){
-				run_bit = false;
+			if (instr == 100)
+				run_bit = false;	//determine instruction type
+			else {
+				d_byte = (instr / 10) % 10;
+
+				instr_type = get_instr_type(instr);
 			}//END if
 			fou <<"Register "<<PC<<": "<<instr << endl;
 			//execute(1,1); //execute instruction*/
@@ -62,6 +67,28 @@ public:void interpret(int memory[], int starting_address){
 
 
 	private:static int get_instr_type(int addr){
+		switch(addr){
+		case '0':
+		break;
+		case '1':
+				break;
+		case '2':
+				break;
+		case '3':
+				break;
+		case '4':
+				break;
+		case '5':
+				break;
+		case '6':
+				break;
+		case '7':
+				break;
+		case '8':
+				break;
+		case '9':
+				break;
+		}//END switch
 		return 0;
 	}//END method get_instr_type
 
