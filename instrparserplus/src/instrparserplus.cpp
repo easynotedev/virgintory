@@ -53,7 +53,7 @@ class Interp{
 int main()
 {
 	//create/initialize memory
-	int memtrix(1000), instrno=0, increm=0;
+	int memtrix[1000], instrno=0, increm=0;
 	string line; //Used in parsing
 	// create a file-reading object
 	ifstream fin("input.txt");
