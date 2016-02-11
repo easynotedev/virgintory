@@ -23,15 +23,18 @@ using std::stringstream;
 ifstream fin("input.txt");
 ofstream fou("output.txt");
 
+
+
 class Interp{
 
 	int PC;
-	static int registers[10];
 	int instr;
 	int instr_type;
-	static int memory[1000];
+	//declare arrays inside class
+	static int memory[];
+	static int registers[];
 	int instructionCounter;
-	bool run_bit = true;
+	bool run_bit;
 
 /*
  *1for (int iii=0;iii<90; iii++)
@@ -42,69 +45,83 @@ class Interp{
  */
 
 public:void interpret(int memory[], int starting_address){
-
+		run_bit = true;
 		PC = starting_address;
-		static int d_byte;
-		static int n_byte;
 		while(run_bit){
-			instr = memory[PC];		//fetch next instruction into instr
-			for(int i=0;i<10;i++){	//sticks Memory data to registers
-									//10 at a time
-			}//END loop
-			PC++;		//increment program counter
-			if (instr == 100)
-				run_bit = false;	//determine instruction type
-			else {
-				d_byte = (instr / 10) % 10;
-
-				instr_type = get_instr_type(instr);
-			}//END if
-			fou <<"Register "<<PC<<": "<<instr << endl;
-			//execute(1,1); //execute instruction*/
-		}//END while run_bit is true
-
-	}//END method interpret
+			instr = memory[PC];
+			PC++;
+			instr_type = get_instr_type(instr);
+			execute(instr_type, instr);
+		    if (instr == 100)
+		    	 run_bit = false;
+		}//END while run_bit is true		//Check registers
+		for(int i=0;i<10;i++){
+			fou <<"Registers "<<i<<": "<<registers[i] << endl;
+		}
+}//END method interpret
 
 
 	private:static int get_instr_type(int addr){
-		switch(addr){
-		case '0':
-		break;
-		case '1':
-				break;
-		case '2':
-				break;
-		case '3':
-				break;
-		case '4':
-				break;
-		case '5':
-				break;
-		case '6':
-				break;
-		case '7':
-				break;
-		case '8':
-				break;
-		case '9':
-				break;
-		}//END switch
-		return 0;
+		static int opcode = addr/100;;
+	return opcode;
 	}//END method get_instr_type
 
 	private:static void execute(int type, int data){
-
+		int registers[10];
+		int memory[1000];
+		int static counter;
+		static int dten = (data/10)%10;
+		static int sone = data%10;
+		switch(type){
+				case '0':
+					break;
+				case '1':
+					break;
+				case '2':
+					cout << sone << endl;
+					registers[dten] = sone;
+					break;
+				/*case '3':
+					registers[dten]=(registers[dten] * sone)%1000;
+					break;
+				case '4':
+					registers[dten]=(registers[sone]+registers[dten])%1000;
+					break;
+				case '5':
+					registers[dten]=registers[sone];
+					break;
+				case '6':
+					registers[dten]=(registers[dten] * registers[sone])%1000;
+					break;
+				case '7':
+					registers[dten]=(registers[dten]+registers[sone])%1000;
+					break;
+				case '8':
+					registers[dten] = memory[registers[sone]];
+					break;
+				case '9':
+					memory[registers[sone]] = registers[dten];
+					break;
+				*/
+				default:
+					registers[counter] = data;
+					cout<<counter <<"   "<< registers[counter] << endl;
+					break;
+				}//END switch
+		counter++;
 	}//END method execute
 };//END class Interp
+
+//defining Array registers
+int Interp::registers[10];
 
 int main()
 {
 	//create/initialize memory
-	int memtrix[1000], instrno=0, increm=0;
-	string line; //Used in parsing
-	// create a file-reading object
-	ifstream fin("input.txt");
-	ofstream fou("output.txt");
+	int memtrix[1000]={0}, instrno=0, increm=0;
+	string line; //buffer string
+	ifstream fin("input.txt"); // create input file stream
+	ofstream fou("output.txt");// create output file stream
 	if(!fin){
 		cout << "No input file found" << endl;
 		return 1; //abort main
@@ -117,9 +134,9 @@ int main()
 		stringstream iss(line);
 			 iss >> instrno;
 			 memtrix[increm] = instrno;
-			 fou << "Memory "<<increm<<": " << memtrix[increm] <<endl;
 			 increm++;
 	  }//END while parser
+
 	Interp quadcore;
 	quadcore.interpret(memtrix,0);
 
