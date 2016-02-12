@@ -23,8 +23,6 @@ using std::stringstream;
 ifstream fin("input.txt");
 ofstream fou("output.txt");
 
-
-
 class Interp{
 
 	int PC;
@@ -36,24 +34,17 @@ class Interp{
 	int instructionCounter;
 	bool run_bit;
 
-/*
- *1for (int iii=0;iii<90; iii++)
-2{
-3anArray[iii] = txtstream.readline(); //reads one line and writes it to the array
-4}
- *
- */
-
 public:void interpret(int memory[], int starting_address){
 		run_bit = true;
 		PC = starting_address;
 		while(run_bit){
 			instr = memory[PC];
-			PC++;
+			cout <<"instruction : " << memory[PC] << endl;
 			instr_type = get_instr_type(instr);
 			execute(instr_type, instr);
 		    if (instr == 100)
 		    	 run_bit = false;
+		    PC++;
 		}//END while run_bit is true		//Check registers
 		for(int i=0;i<10;i++){
 			fou <<"Registers "<<i<<": "<<registers[i] << endl;
@@ -62,23 +53,26 @@ public:void interpret(int memory[], int starting_address){
 
 
 	private:static int get_instr_type(int addr){
-		static int opcode = addr/100;;
+		static int opcode;
+		static int i;
+		opcode = addr /100;
+		cout <<"Opcode "<<i++<<" : "<< opcode << endl;
 	return opcode;
 	}//END method get_instr_type
 
 	private:static void execute(int type, int data){
-		int registers[10];
-		int memory[1000];
-		int static counter;
-		static int dten = (data/10)%10;
-		static int sone = data%10;
+		static int counter;
+		static int dten;
+		static int sone;
+		dten = (data/10)%10;
+		sone = data%10;
 		switch(type){
-				case '0':
+				/*case 0:
 					break;
-				case '1':
-					break;
-				case '2':
-					cout << sone << endl;
+				case 1:
+				*/	break;
+				case 2:
+					cout <<"dten : "<< dten <<" sone : "<<sone<< endl;
 					registers[dten] = sone;
 					break;
 				/*case '3':
@@ -105,7 +99,7 @@ public:void interpret(int memory[], int starting_address){
 				*/
 				default:
 					registers[counter] = data;
-					cout<<counter <<"   "<< registers[counter] << endl;
+					cout<<"WHAT? "<<counter<<" : " << registers[counter] << endl;
 					break;
 				}//END switch
 		counter++;
