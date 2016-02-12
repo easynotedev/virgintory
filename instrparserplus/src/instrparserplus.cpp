@@ -19,6 +19,9 @@ using std::ofstream;
 using std::string;
 #include <sstream>
 using std::stringstream;
+#include<iomanip>
+using std::setw;
+using std::setfill;
 
 //Input and Output pointer and creation
 ifstream fin("input.txt");
@@ -49,7 +52,9 @@ public:void interpret(int (&memory)[1000], int starting_address){
 		    PC++;
 		}//END while run_bit is true		//Check registers
 		for(int i=0;i<10;i++){
-			fou<<"Register "<<i<<" : "<<registers[i]<<endl;
+			fou<<"Register "<<i<<" : ";
+			fou<<setfill('0')<<setw(3);
+			fou<<registers[i]<<endl;
 		}//END for
 		fou <<"Number of instructions executed: "<<counter<<endl;
 }//END method interpret
