@@ -1,10 +1,11 @@
-Registers 0: 0
-Registers 1: 0
-Registers 2: 471
-Registers 3: 381
-Registers 4: 472
-Registers 5: 382
-Registers 6: 473
-Registers 7: 383
-Registers 8: 100
-Registers 9: 0
+Register 0 : 0
+Register 1 : 0
+Register 2 : 0
+Register 3 : 0
+Register 4 : 0
+Register 5 : 0
+Register 6 : 0
+Register 7 : 0
+Register 8 : 6
+Register 9 : 0
+Number of instructions executed: 9
