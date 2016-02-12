@@ -34,7 +34,7 @@ class Interp{
 	int instructionCounter;
 	bool run_bit;
 
-public:void interpret(int memory[], int starting_address){
+public:void interpret(int (&memory)[1000], int starting_address){
 		run_bit = true;
 		PC = starting_address;
 		while(run_bit){
@@ -47,8 +47,8 @@ public:void interpret(int memory[], int starting_address){
 		    PC++;
 		}//END while run_bit is true		//Check registers
 		for(int i=0;i<10;i++){
-			fou <<"Registers "<<i<<": "<<registers[i] << endl;
-		}
+			fou<<"Register "<<i<<" : "<<registers[i]<<endl;
+		}//END for
 }//END method interpret
 
 
@@ -59,6 +59,7 @@ public:void interpret(int memory[], int starting_address){
 		cout <<"Opcode "<<i++<<" : "<< opcode << endl;
 	return opcode;
 	}//END method get_instr_type
+
 
 	private:static void execute(int type, int data){
 		static int counter;
@@ -73,7 +74,7 @@ public:void interpret(int memory[], int starting_address){
 				*/	break;
 				case 2:
 					cout <<"dten : "<< dten <<" sone : "<<sone<< endl;
-					registers[dten] = sone;
+					registers[dten]=sone;
 					break;
 				/*case '3':
 					registers[dten]=(registers[dten] * sone)%1000;
@@ -98,9 +99,7 @@ public:void interpret(int memory[], int starting_address){
 					break;
 				*/
 				default:
-					registers[counter] = data;
-					cout<<"WHAT? "<<counter<<" : " << registers[counter] << endl;
-					break;
+					cout <<"error output"<<endl;
 				}//END switch
 		counter++;
 	}//END method execute
@@ -137,3 +136,4 @@ int main()
 	fin.close();
 	fou.close();
 }//END main
+
