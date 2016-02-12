@@ -6,8 +6,9 @@
 // Accreditation: The assignment template almost gave the answer
 //				: I was able to piece together the general idea of the
 //                assignment
-//				: due to the template. Although I got the syntax of parsing
-//				: the text file online Notably, stackoverflow.com cplusplus.com
+//				: due to the template given in java. Sources online made me aware
+//				: of c++ function that could parse the data inside a text file
+//				: stackoverflow.com cplusplus.com
 //============================================================================
 #include <iostream>
 using std::cout;
@@ -97,7 +98,7 @@ public:void interpret(int (&memory)[1000], int starting_address){
 					registers[dten]=(registers[dten] * sone)%1000;
 					break;
 				case 4:
-					registers[dten]=(registers[sone]+registers[dten])%1000;
+					registers[dten]=(registers[dten]+sone)%1000;
 					break;
 				case 5:
 					registers[dten]=registers[sone];
@@ -115,7 +116,7 @@ public:void interpret(int (&memory)[1000], int starting_address){
 					memory[registers[sone]] = registers[dten];
 					break;
 				default:
-					cout <<"error output"<<endl;
+					cout <<"catch opcode 1"<<endl;
 				}//END switch
 		counter++;
 	}//END method execute
