@@ -1,13 +1,14 @@
 //============================================================================
 // Name        	: instrparserplus.cpp
 // Author      	: Antonin Karlo M. Tilaon
-// Course Info 	: Dr. Rainwater / COSC 3355 Assgnment I
+// Course Info 	: COSC 3355 Assgnment I
+//Instructor	: Dr. Stephen Rainwater
 // Description 	: Instruction Parser
 // Accreditation: The assignment template almost gave the answer
 //				: I was able to piece together the general idea of the
-//                assignment
-//				: due to the template given in java. Sources online made me aware
-//				: of c++ function that could parse the data inside a text file
+//                assignment due to the template given in java.
+//				: Sources online made me aware,
+//				: of c++ functions that could parse the data inside a text file
 //				: stackoverflow.com cplusplus.com
 //============================================================================
 #include <iostream>
@@ -30,7 +31,7 @@ ofstream fou("output.txt");
 
 class Interp{
 
-	int PC;
+	static int PC;
 	int instr;
 	int instr_type;
 	int counter;	//instruction counter
@@ -45,12 +46,18 @@ public:void interpret(int (&memory)[1000], int starting_address){
 		PC = starting_address;
 		while(run_bit){
 			instr = memory[PC];
-			cout <<"instruction : " << memory[PC] << endl;
+			if (instr == 100)
+				run_bit = false;
+			cout <<"Instruction No : "<<counter<<endl;
+			cout <<"instruction : " << memory[PC] <<" PC : "<<PC<< endl;
+			PC++; //Program Counter Increment
 			instr_type = get_instr_type(instr);
 			execute(instr_type, instr);
-			if (instr == 100)
-		    	 run_bit = false;
-		    PC++;
+			for(int i=0;i<10;i++){
+						cout<<"Register "<<i<<" : ";
+						cout<<setfill('0')<<setw(3);
+						cout<<registers[i]<<endl;
+			}//END for
 		}//END while run_bit is true		//Check registers
 		for(int i=0;i<10;i++){
 			fou<<"Register "<<i<<" : ";
@@ -63,38 +70,40 @@ public:void interpret(int (&memory)[1000], int starting_address){
 
 	private:static int get_instr_type(int addr){
 		static int opcode;
-		static int i;
 		opcode = addr /100;
-		cout <<"Opcode "<<i++<<" : "<< opcode << endl;
+		cout <<"Opcode : "<< opcode;
 	return opcode;
 	}//END method get_instr_type
 
 
 	public: void execute(int type, int data){
-		static int dten;
-		static int sone;
+		static int dten;		//2nd-digit int holder
+		static int sone;		//3rd-digit int holder
+		//static int regS,regSType,regSdten,regSone;
 		dten = (data/10)%10;
 		sone = data%10;
+		cout<<" D : "<<dten;
+		cout<<" N/S : "<<sone<<endl;
 		switch(type){
 				case 0:
-					static int regS=registers[sone];
-					static int regSType,regSten,regSone;
-					regSType=regS/100;
-					regSten=(regS/10)%10;
-					regSone=regS%10;
-					if(regSType==0||regSten==0||regSone==0){
-						//register contains zero
-					}
-					else{
-						//means go to the location in register d
-						fou <<"go to the location in register d"<<endl;
-						//**
-					}//END if-else
+					//**if I want to check each digit of Register S
+					//regS = registers[sone];	//Register S value
+					//regSType = regS /100;	//Opcode digit
+					//regSdten = (regS/10)%10;//2nd digit
+					//regSone = regS%10;		//3rd digit
+					//unless register s contains 0
+					//if(regSType!=0)&&(regSdten!=0)&&(regSone!=0)
+					//**if I want to check each digit of Register S
+					if(registers[sone]!=0)
+						//go to the location in register d
+						PC = registers[dten];
 					break;
 				case 2:
+					//means set register d to the value n
 					registers[dten]=sone;
 					break;
 				case 3:
+					//means multiply register d by the value n
 					registers[dten]=(registers[dten] * sone)%1000;
 					break;
 				case 4:
@@ -107,7 +116,7 @@ public:void interpret(int (&memory)[1000], int starting_address){
 					registers[dten]=(registers[dten] * registers[sone])%1000;
 					break;
 				case 7:
-					registers[dten]=(registers[dten]+registers[sone])%1000;
+					registers[dten]=(registers[dten] + registers[sone])%1000;
 					break;
 				case 8:
 					registers[dten] = memory[registers[sone]];
@@ -116,6 +125,7 @@ public:void interpret(int (&memory)[1000], int starting_address){
 					memory[registers[sone]] = registers[dten];
 					break;
 				default:
+					//Do nothing to the registers
 					cout <<"catch opcode 1"<<endl;
 				}//END switch
 		counter++;
@@ -125,6 +135,7 @@ public:void interpret(int (&memory)[1000], int starting_address){
 //defining Arrays
 int Interp::memory[1000];
 int Interp::registers[10];
+int Interp::PC=0;
 
 int main()
 {
