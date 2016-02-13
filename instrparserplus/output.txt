@@ -1,11 +1,11 @@
 Register 0 : 000
-Register 1 : 000
+Register 1 : 720
 Register 2 : 000
 Register 3 : 000
 Register 4 : 000
 Register 5 : 000
 Register 6 : 000
-Register 7 : 000
-Register 8 : 006
-Register 9 : 000
-Number of instructions executed: 9
+Register 7 : 011
+Register 8 : 000
+Register 9 : 999
+Number of instructions executed: 30
