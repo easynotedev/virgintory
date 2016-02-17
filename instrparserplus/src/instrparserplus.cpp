@@ -6,7 +6,7 @@
 // Description 	: Instruction Parser
 // Accreditation: The assignment template almost gave the answer
 //				: I was able to piece together the general idea of the
-//                assignment due to the template given in java.
+//              : assignment due to the template given in java.
 //				: Sources online made me aware,
 //				: of c++ functions that could parse the data inside a text file
 //				: stackoverflow.com cplusplus.com
@@ -31,7 +31,7 @@ ofstream fou("output.txt");
 
 class Interp{
 
-	static int PC;
+	static int PC;	//Program Counter
 	int instr;
 	int instr_type;
 	int counter;	//instruction counter
@@ -41,10 +41,13 @@ class Interp{
 	bool run_bit;
 
 public:void interpret(int (&memory)[1000], int starting_address){
+		//initialize counter to zero whenever interpret is called
 		counter = 0;
+		//variable that determines if the program will run
 		run_bit = true;
 		PC = starting_address;
 		while(run_bit){
+			//set a current memory command as current instruction
 			instr = memory[PC];
 			if (instr == 100)
 				run_bit = false;
